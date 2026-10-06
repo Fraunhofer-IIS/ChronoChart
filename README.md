@@ -50,9 +50,11 @@ $ROOT_DIR/reports/
 ```
 
 ## Paper reproduction
-To quickly reproduce the results reported in the paper, run the noteboooks
+To quickly run the experiments from the paper, run the noteboooks
 `examples/train_5g.ipynb` for Fraunhofer 5G and `examples/train_dichasus.ipynb` for Dichasus.
 Passive UWB will be added once the datset is public.
+
+Due to problems with the original seed, this will not produce the exact values reported in the paper, but pretty close ones.
 
 ## Citation
 

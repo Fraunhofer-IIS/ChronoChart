@@ -25,7 +25,7 @@ def extract_images_from_tensorboard(logdir, tag, output_folder):
         img = Image.open(io.BytesIO(img_data.encoded_image_string))
         img.save(f"{output_folder}/frame_{i:03d}.png")
     
-    print(f"✅ Saved {len(imgs)} images to '{output_folder}'.")
+    print(f"Saved {len(imgs)} images to '{output_folder}'.")
 
 
 from PIL import Image, ImageDraw, ImageFont
@@ -82,7 +82,7 @@ def create_gif_with_steps(image_files, output_path, duration=500, last_duration=
         disposal=2
     )
 
-    print(f"🎞️ GIF with steps saved to '{output_path}' ({total} frames).")
+    print(f"GIF with steps saved to '{output_path}' ({total} frames).")
 
 
 # Step 1: Extract TensorBoard images

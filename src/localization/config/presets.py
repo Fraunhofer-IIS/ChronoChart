@@ -23,3 +23,11 @@ config_passive = TrainingConfig(
     loss_scheduler_start=0.0001,
     loss_scheduler_steps=100,
 )
+
+config_custom = TrainingConfig(
+    model_name = "custom",
+    custom_model = "dichasus", # 5G / dichasus
+    K=4,
+    max_epochs=300,
+    custom_path = "path/to/data"
+)

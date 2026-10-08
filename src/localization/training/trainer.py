@@ -56,9 +56,8 @@ from src.localization.models.base import ModelResult
 from src.localization.data.loaders import (
     DichasusLoader,
     FiveGLoader,
-    JonasLoader,
-    MaxLoader,
     PassiveLoader,
+    CustomLoader,
 )
 from src.localization.config.training import TrainingConfig
 from copy import deepcopy
@@ -131,6 +130,7 @@ class TripletLearningModule(LightningModule):
             "dichasus": DichasusLoader(self.config),
             "5G": FiveGLoader(self.config),
             "passive": PassiveLoader(self.config),
+            "custom": CustomLoader(self.config)
         }
 
         # Model

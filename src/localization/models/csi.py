@@ -40,7 +40,7 @@ class SelfAttention1D(nn.Module):
         # x: [B, N]
         B, N = x.shape
 
-        # 1️⃣ Project to embedding space
+        # Project to embedding space
         #x_emb = torch.cat((x,y),-1)
         x_emb = self.x_proj(x.unsqueeze(-1))  # [B, N, d_model]
         y_emb = self.y_proj(y.unsqueeze(-1))     # [B, N, d_model]
@@ -50,7 +50,7 @@ class SelfAttention1D(nn.Module):
         
 
 
-        # 2️⃣ Self-attention
+        # Self-attention
         attn_out, attn_weights = self.attn(x_emb, y_emb, y_emb)
 
         attn_out = self.output_proj(attn_out)  # [B, N]

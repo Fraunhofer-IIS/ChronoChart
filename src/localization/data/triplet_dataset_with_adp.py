@@ -312,12 +312,10 @@ class TripletDatasetWithADP(BaseTripletDataset):
         self._preprocess()   
         print("data preprocessed")     
 
-
-        
-
         
     def __len__(self):
         return len(self.positive_indexes) #len(self.keep_idxs) # Or however many pairs you want
+    
     def _save(self):
         device = torch.device('cpu')
         dtype = torch.float32
@@ -330,29 +328,10 @@ class TripletDatasetWithADP(BaseTripletDataset):
         self.timestamps = torch.from_numpy(timestamps).to(dtype=dtype, device=device)
         self.reference = torch.from_numpy(groundtruth_positions).to(dtype=dtype, device=device)
 
-
-        #self.timestamps = isotonic_decreasing_torch(self.timestamps)
-
-
         np.save(ptdir/'csi.npy',self.csi)
         torch.save(self.timestamps,ptdir/'timestamps.pt')
         torch.save(self.reference,ptdir/'reference.pt')
 
-        if False:
-            if not os.path.exists(ptdir/'adp_dissimilarity_matrix.pt'):
-                self.adp_dissimilarity_matrix = get_adp(csi_time_domain)
-                torch.save(torch.from_numpy(self.adp_dissimilarity_matrix),ptdir/'adp_dissimilarity_matrix.pt')
-
-            if not os.path.exists(ptdir/'time_dissimilarity_matrix.pt'):
-                #self.timestamp_dissimilarity_matrix = pairwise_mean_sq_diff_broadcast(self.timestamps)
-                self.timestamp_dissimilarity_matrix = torch.abs(self.timestamps[:,None] - self.timestamps[None,:]) 
-                torch.save(self.timestamp_dissimilarity_matrix,ptdir/'time_dissimilarity_matrix.pt')
-
-            if not os.path.exists(ptdir/'dissimilarity_matrix_geodesic.pt'):
-                self.adp_dissimilarity_matrix = torch.load(ptdir/'adp_dissimilarity_matrix.pt',map_location=device,mmap=mmap)
-                self.timestamp_dissimilarity_matrix = torch.load(ptdir/'time_dissimilarity_matrix.pt',map_location=device,mmap=mmap)
-                self.dissimilarity_matrix_geodesic = torch.from_numpy(get_geodistance(self.adp_dissimilarity_matrix,self.timestamp_dissimilarity_matrix))
-                torch.save(self.dissimilarity_matrix_geodesic,ptdir/'dissimilarity_matrix_geodesic.pt')
                 
     def _load(self):
         device = torch.device('cpu')
@@ -361,18 +340,9 @@ class TripletDatasetWithADP(BaseTripletDataset):
         ptdir = self.path_config.pt_dir
         print("loading data from", ptdir)
 
-
         self.csi = np.load(ptdir/'csi.npy')#,mmap_mode='r+')
         self.timestamps = torch.load(ptdir/'timestamps.pt',map_location=device,mmap=mmap)
         self.reference = torch.load(ptdir/'reference.pt',map_location=device,mmap=mmap)
-
-        if False:
-            self.adp_dissimilarity_matrix = torch.load(ptdir/'adp_dissimilarity_matrix.pt',map_location=device,mmap=mmap)
-            self.timestamp_dissimilarity_matrix = torch.load(ptdir/'time_dissimilarity_matrix.pt',map_location=device,mmap=mmap)
-            self.dissimilarity_matrix_geodesic = torch.load(ptdir/'dissimilarity_matrix_geodesic.pt',map_location=device,mmap=mmap)
-            self.dissimilarity_matrix_geodesic = self._normalize(self.dissimilarity_matrix_geodesic)
-            self.timestamp_dissimilarity_matrix = self._normalize(self.timestamp_dissimilarity_matrix) 
-        
 
 
     def __len__(self):

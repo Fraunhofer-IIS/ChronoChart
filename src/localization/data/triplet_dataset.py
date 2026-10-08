@@ -217,8 +217,6 @@ class TripletDataset(BaseTripletDataset):
         super().__init__(csi_time_domain, timestamps, reference, K, temporal_window_seconds)
         self._preprocess()
         
-    
-    
     def __getitem__(self, index):
         return self._getitem__(index)
     

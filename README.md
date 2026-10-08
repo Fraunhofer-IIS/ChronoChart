@@ -56,6 +56,29 @@ Passive UWB will be added once the datset is public.
 
 Due to problems with the original seed, this will not produce the exact values reported in the paper, but pretty close ones.
 
+## Custom Datasets
+
+To use your own dataset, update the `config_custom` configuration in:
+
+src/localization/config/presets.py
+
+Set `custom_model` according to your dataset format:
+
+- `5G` for the Fraunhofer 5G dataset format
+- `dichasus` for the Dichasus dataset format
+
+Your dataset must be stored as a pickle file containing a list with the following elements:
+
+1. A NumPy array of timestamps
+2. A NumPy array containing the CIRs:
+   - For the `5G` model: `[imag/real, number of antennas, number of delay taps]`
+   - For the `dichasus` model: `[imag/real, number of arrays, number of patches, number of delay taps]`
+3. Reference positions in 2D, used only for evaluation. If no reference positions are available, set this value to `0`.
+
+Run training with your custom dataset using:
+
+python ../main.py train --mode NashMTL --config custom
+
 ## Citation
 
 If you use our work, please consider citing

@@ -46,4 +46,6 @@ class TrainingConfig:
     val_samples: int = 4096
     
     aggregator_name:str = "NashMTL"
+    custom_model: str = "dichasus"
+    custom_path: str = ""
 

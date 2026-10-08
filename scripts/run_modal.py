@@ -8,7 +8,7 @@ import os
 from pathlib import Path
 
 
-# --- Configuration ---
+# Configuration
 REPO_NAME = "localization"
 
 LOCAL_REPO_DIR = str(Path(__file__).resolve().parents[1])
@@ -22,7 +22,7 @@ MODAL_OUTPUT_DIR = f"{MODAL_ROOT}/output"
 # Modal Volume — persists between runs
 volume = modal.Volume.from_name("localization-vol", create_if_missing=True)
 #modal volume dashboard localization-vol
-# --- Image: install deps from repo (cached), then overlay local code fresh on every run ---
+# Image: install deps from repo (cached), then overlay local code fresh on every run
 image = (
     modal.Image.debian_slim(python_version="3.13.5")
     .env({"PYTHONPATH": f"/root/{REPO_NAME}"})
@@ -112,9 +112,9 @@ def download_volume_folder(volume_name: str, remote_path: str, local_path: str):
     ], capture_output=True, text=True)
     
     if result.returncode == 0:
-        print("✅ Download completed successfully!")
+        print("Download completed successfully!")
     else:
-        print("❌ Download failed:")
+        print("Download failed:")
         print(result.stderr)
     
 @app.local_entrypoint()

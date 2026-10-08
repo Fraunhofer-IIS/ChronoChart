@@ -5,6 +5,7 @@ from localization.config.presets import (
     config_5g,
     config_dichasus,
     config_passive,
+    config_custom
 )
 
 def get_config_by_name(config_name):
@@ -13,6 +14,7 @@ def get_config_by_name(config_name):
         "dichasus": config_dichasus,
         "5g": config_5g,
         "passive": config_passive,
+        "custom": config_custom,
     }
     
     if config_name not in config_map:
@@ -29,8 +31,8 @@ def parse_args():
     description=(
         "Localization Training Runner\n\n"
         "This script provides two main commands:\n\n"
-        "1) train   → Run training experiments (UPGrad or PCGrad)\n"
-        "2) analyze → Analyze logs using LogAnalyzer\n\n"
+        "1) train:  Run training experiments (UPGrad or PCGrad)\n"
+        "2) analyze:  Analyze logs using LogAnalyzer\n\n"
         "Examples:\n"
         "  Train:\n"
         "    python script.py train --mode upgrad --config 5g\n\n"
@@ -49,8 +51,8 @@ def parse_args():
         description=(
             "Run training using different gradient strategies.\n\n"
             "Modes:\n"
-            "  upgrad  → UPGrad training\n"
-            "  pcgrad  → PCGrad training\n\n"
+            "  upgrad\n"
+            "  pcgrad\n\n"
             "Example:\n"
             "  python script.py train --mode upgrad --config 5g --k 5"
         ),
@@ -73,13 +75,12 @@ def parse_args():
         "--config",
         type=str,
         required=True,
-        choices=["dichasus", "5g", "jonas", "max", "passive"],
+        choices=["dichasus", "5g", "custom", "passive"],
         help=(
             "Select which config to use:\n"
             "  dichasus - Dichasus config\n"
             "  5g       - 5G config\n"
-            "  jonas    - Jonas config\n"
-            "  max      - Max config\n"
+            "  custom   - config for custom datasets\n"
             "  passive  - Passive config"
         )
     )

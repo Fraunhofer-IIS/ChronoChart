@@ -24,7 +24,7 @@ class PathConfig:
     fiveg_train:Path= fiveg_dir / "training_data"
     fiveg_test:Path= fiveg_dir / "test_data"
     pt_dir:Path = data_dir/"pt" 
-    
+
     #csv_dir:Path = ROOT_DIR / "csv"
     lightning_logs:Path = root_dir / "lightning_logs/"
     reports:Path = root_dir / "reports"

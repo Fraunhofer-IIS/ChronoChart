@@ -4,6 +4,7 @@ This is the code for the paper ChronoChart: Setup-Agnostic Channel Charting for
 Label-Free Indoor Localization.
 It is a setup-agnostic channel charting approach that only needs timestamp.
 
+The slides from the presentation can be found here [here](ChronoChart.pdf)
 
 ## Requirements
 
@@ -50,7 +51,7 @@ $ROOT_DIR/reports/
 ```
 
 ## Paper reproduction
-To quickly run the experiments from the paper, run the noteboooks
+To quickly download the datasets and run the experiments from the paper, run the noteboooks
 `examples/train_5g.ipynb` for Fraunhofer 5G and `examples/train_dichasus.ipynb` for Dichasus.
 Passive UWB will be added once the datset is public.
 
